@@ -25,8 +25,8 @@ public class CargoCompatibilityValidator
         ArgumentNullException.ThrowIfNull(vehicle);
         ValidateCargoesOnly(cargoes);
 
-        ValidateVehicleCapabilities(vehicle, cargoes);
         ValidateTotalCapacity(vehicle, cargoes);
+        ValidateVehicleCapabilities(vehicle, cargoes);
     }
 
     private static void ValidateExpirationDates(IEnumerable<Cargo> cargoes)
