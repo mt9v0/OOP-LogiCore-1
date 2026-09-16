@@ -1,0 +1,12 @@
+/Users/margaritatregubova/LogicCore/LogiCore.Domain/obj/Debug/net9.0/LogiCore.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/margaritatregubova/LogicCore/LogiCore.Domain/obj/Debug/net9.0/LogiCore.Domain.AssemblyInfoInputs.cache
+/Users/margaritatregubova/LogicCore/LogiCore.Domain/obj/Debug/net9.0/LogiCore.Domain.AssemblyInfo.cs
+/Users/margaritatregubova/LogicCore/LogiCore.Domain/obj/Debug/net9.0/LogiCore.Domain.csproj.CoreCompileInputs.cache
+/Users/margaritatregubova/LogicCore/LogiCore.Domain/obj/Debug/net9.0/LogiCore.Domain.sourcelink.json
+/Users/margaritatregubova/LogicCore/LogiCore.Domain/bin/Debug/net9.0/LogiCore.Domain.deps.json
+/Users/margaritatregubova/LogicCore/LogiCore.Domain/bin/Debug/net9.0/LogiCore.Domain.dll
+/Users/margaritatregubova/LogicCore/LogiCore.Domain/bin/Debug/net9.0/LogiCore.Domain.pdb
+/Users/margaritatregubova/LogicCore/LogiCore.Domain/obj/Debug/net9.0/LogiCore.Domain.dll
+/Users/margaritatregubova/LogicCore/LogiCore.Domain/obj/Debug/net9.0/refint/LogiCore.Domain.dll
+/Users/margaritatregubova/LogicCore/LogiCore.Domain/obj/Debug/net9.0/LogiCore.Domain.pdb
+/Users/margaritatregubova/LogicCore/LogiCore.Domain/obj/Debug/net9.0/ref/LogiCore.Domain.dll
