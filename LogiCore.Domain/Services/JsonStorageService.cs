@@ -33,10 +33,17 @@ public class JsonStorageService
     public SystemStateDto LoadState(string filePath)
     {
         if (!File.Exists(filePath))
-            throw new FileNotFoundException($"Файл не найден(");
+            throw new FileNotFoundException($"Файл состояния не найден: {filePath}");
 
-        string json = File.ReadAllText(filePath);
-        return JsonSerializer.Deserialize<SystemStateDto>(json, _options) 
-               ?? throw new InvalidOperationException("Не удалось десериализовать данные из JSON((");
+        try
+        {
+            string json = File.ReadAllText(filePath);
+            var state = JsonSerializer.Deserialize<SystemStateDto>(json, _options);
+            return state ?? throw new InvalidOperationException("JSON пустой или имеет неправильный формат");
+        }
+        catch (JsonException ex)
+        {
+            throw new InvalidOperationException($"Файл состояния повреждён: {filePath}", ex);
+        }
     }
 }
