@@ -7,6 +7,7 @@ public readonly struct RoutePoint
 {
     public double Latitude { get; }
     public double Longitude { get; }
+    private const double KmPerDegree = 111.0;
 
     public RoutePoint(double latitude, double longitude)
     {
@@ -19,7 +20,7 @@ public readonly struct RoutePoint
     {
         double dx = a.Latitude - b.Latitude;
         double dy = a.Longitude - b.Longitude;
-        return Math.Sqrt(dx * dx + dy * dy) * 111.0;
+        return Math.Sqrt(dx * dx + dy * dy) * KmPerDegree;
     }
 
     // Явное приведение типа в string (T10 [5])
