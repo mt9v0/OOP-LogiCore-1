@@ -1,0 +1,7 @@
+bin/
+obj/
+*.log
+system_state.json
+test_state.json
+*.user
+.vs/
