@@ -24,17 +24,7 @@ public class Order : IEntity
 
     [JsonInclude]
     public Route Route { get; private set; } = null!;
-
-    [JsonInclude]
-    public List<Cargo> Cargoes
-    {
-        get => _cargoes;
-        private set
-        {
-            _cargoes.Clear();
-            if (value != null) _cargoes.AddRange(value);
-        }
-    }
+    public IReadOnlyCollection<Cargo> Cargoes => _cargoes;
 
     [JsonInclude]
     public Vehicle? AssignedVehicle { get; private set; }
@@ -46,22 +36,32 @@ public class Order : IEntity
     public OrderStatus Status { get; private set; }
 
     [JsonConstructor]
-    private Order() { }
-
-    public Order(Customer customer, Route route, IEnumerable<Cargo> cargoes)
+    private Order(Guid id, Customer customer, Route route, IReadOnlyCollection<Cargo> cargoes,
+                Vehicle? assignedVehicle, decimal finalCost, OrderStatus status)
     {
+        Id = id;
         Customer = customer ?? throw new ArgumentNullException(nameof(customer));
         Route = route ?? throw new ArgumentNullException(nameof(route));
-        
-        var cargoList = cargoes?.ToList() ?? throw new ArgumentNullException(nameof(cargoes));
-        if (cargoList.Count == 0)
-            throw new ArgumentException("Заказ должен содержать хотя бы один груз", nameof(cargoes));
+        _cargoes = cargoes.ToList() ?? new List<Cargo>();
+        AssignedVehicle = assignedVehicle;
+        FinalCost = finalCost;
+        Status = status;
 
-        Id = Guid.NewGuid();
-        _cargoes = cargoList;
-        Status = OrderStatus.Created;
-        
-        customer.AddOrder(this);
+        customer.AddOrder(this);  
+    }
+
+    public Order(Customer customer, Route route, IEnumerable<Cargo> cargoes)
+    : this(Guid.NewGuid(), customer, route, ToListOrThrow(cargoes),
+            null, 0m, OrderStatus.Created)
+    {
+    }
+
+    private static List<Cargo> ToListOrThrow(IEnumerable<Cargo> cargoes)
+    {
+        var list = cargoes?.ToList() ?? throw new ArgumentNullException(nameof(cargoes));
+        if (list.Count == 0)
+            throw new ArgumentException("Заказ должен содержать хотя бы один груз", nameof(cargoes));
+        return list;
     }
 
     public void AssignVehicle(Vehicle vehicle, decimal calculatedCost)
@@ -126,4 +126,12 @@ public class Order : IEntity
 
     public override string ToString() =>
         $"Заказ [{Id.ToString()[..8]}] | Клиент: {Customer.Name} | Статус: {Status} | Стоимость: {FinalCost:C}";
+
+    public void UpdateFinalCost(decimal newCost)
+    {
+        if (newCost < 0)
+            throw new ArgumentOutOfRangeException(nameof(newCost), "Стоимость не может быть отрицательной");
+        FinalCost = newCost;
+    }
 }
+
