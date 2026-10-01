@@ -82,9 +82,9 @@ public class DeliveryService
                     bestVehicle = vehicle;
                 }
             }
-            catch (VehicleOverloadException ex)
+            catch (VehicleOverloadException)
             {
-                VehicleOverloadAttempt?.Invoke(this, new VehicleOverloadAttemptEventArgs(vehicle, ex.AttemptedWeight));
+                
             }
             catch (LogisticsException)
             {
@@ -102,6 +102,11 @@ public class DeliveryService
         }
 
         return (bestVehicle, minCost);
+    }
+
+    public void ReportOverloadAttempt(Vehicle vehicle, double attemptedWeight)
+    {
+        VehicleOverloadAttempt?.Invoke(this, new VehicleOverloadAttemptEventArgs(vehicle, attemptedWeight));
     }
 
     public void StartOrderDelivery(Order order)
