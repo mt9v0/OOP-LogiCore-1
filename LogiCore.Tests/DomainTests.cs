@@ -93,7 +93,7 @@ public class DomainTests
     public void Validator_IncompatibleTemperature_ReturnsFalseOnCanCarry()
     {
         var refr = new RefrigeratorTruck("B067BB28", 5000, 20, 70, 60m, minTemperatureC: -20, maxTemperatureC: -10);
-        var warmCargo = CargoFactory.CreatePerishable("Цветочки", 50, 0.5, 1000, DateTime.UtcNow.AddDays(5), requiredTemperatureC: +5);
+        var warmCargo = CargoFactory.CreatePerishable("Цветочки", 50, 0.5, 1000, DateTime.UtcNow.AddDays(5), +5);
 
         Assert.False(refr.CanCarry(warmCargo));
     }
