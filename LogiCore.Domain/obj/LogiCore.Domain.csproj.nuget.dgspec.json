@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/margaritatregubova/LogicCore/LogiCore.Domain/LogiCore.Domain.csproj": {}
+    "/Users/margaritatregubova/Downloads/OOP-LogiCore-final/LogiCore.Domain/LogiCore.Domain.csproj": {}
   },
   "projects": {
-    "/Users/margaritatregubova/LogicCore/LogiCore.Domain/LogiCore.Domain.csproj": {
+    "/Users/margaritatregubova/Downloads/OOP-LogiCore-final/LogiCore.Domain/LogiCore.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/margaritatregubova/LogicCore/LogiCore.Domain/LogiCore.Domain.csproj",
+        "projectUniqueName": "/Users/margaritatregubova/Downloads/OOP-LogiCore-final/LogiCore.Domain/LogiCore.Domain.csproj",
         "projectName": "LogiCore.Domain",
-        "projectPath": "/Users/margaritatregubova/LogicCore/LogiCore.Domain/LogiCore.Domain.csproj",
+        "projectPath": "/Users/margaritatregubova/Downloads/OOP-LogiCore-final/LogiCore.Domain/LogiCore.Domain.csproj",
         "packagesPath": "/Users/margaritatregubova/.nuget/packages/",
-        "outputPath": "/Users/margaritatregubova/LogicCore/LogiCore.Domain/obj/",
+        "outputPath": "/Users/margaritatregubova/Downloads/OOP-LogiCore-final/LogiCore.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/margaritatregubova/.nuget/NuGet/NuGet.Config"

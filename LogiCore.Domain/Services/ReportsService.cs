@@ -1,5 +1,8 @@
 namespace LogiCore.Domain.Services;
 
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using LogiCore.Domain.Enums;
 using LogiCore.Domain.Models.Cargoes;
 using LogiCore.Domain.Models.Customers;
@@ -61,5 +64,32 @@ public class ReportsService
             .OfType<DangerousCargo>()
             .GroupBy(c => c.DangerClass)
             .ToDictionary(g => g.Key, g => g.Count());
+    }
+    public void PrintAllReports(DeliveryService delivery, TextWriter writer)
+    {
+        writer.WriteLine("\n--- 1. Топ-3 ТС по выручке ---");
+        foreach (var r in GetTop3VehiclesByRevenue(delivery.Orders))
+            writer.WriteLine($"   {r.Vehicle.RegistrationNumber} ({r.Vehicle.GetType().Name}): {r.Revenue:C}");
+
+        writer.WriteLine("\n--- 2. Заказы по статусам ---");
+        foreach (var r in GetOrderStatsByStatus(delivery.Orders))
+            writer.WriteLine($"   {r.Status}: {r.Count} шт., сумма {r.TotalCost:C}");
+
+        writer.WriteLine("\n--- 3. Средняя загрузка ТС по типам ---");
+        foreach (var r in GetAverageLoadByVehicleType(delivery.Orders))
+            writer.WriteLine($"   {r.VehicleType}: {r.AvgLoadPercentage:F1}%");
+
+        writer.WriteLine("\n--- 4. Клиенты с суммой заказов выше порога ---");
+        var customers = delivery.Orders.Select(o => o.Customer).Distinct().ToList();
+        foreach (var r in GetVIPCustomers(customers, 10000m))
+            writer.WriteLine($"   {r.Customer.Name}: {r.TotalSpent:C}");
+
+        writer.WriteLine("\n--- 5. Join «груз → заказ → клиент» ---");
+        foreach (var line in GetCargoCustomerMapQuerySyntax(delivery.Orders))
+            writer.WriteLine($"   {line}");
+
+        writer.WriteLine("\n--- 6. Класс опасности → количество грузов ---");
+        foreach (var kv in GetDangerousCargoCountByClass(delivery.Orders))
+            writer.WriteLine($"   Класс {kv.Key}: {kv.Value} шт.");
     }
 }
